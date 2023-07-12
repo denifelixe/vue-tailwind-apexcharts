@@ -1,6 +1,7 @@
 <script setup>
     import ApexCharts from "vue3-apexcharts";
     import { computed } from 'vue';
+    import moment from 'moment';
 
     const props = defineProps([
         // Class
@@ -26,7 +27,7 @@
         return {
             type: 'datetime',
             labels: {
-                format: 'dd MMMM yyyy'
+                format: 'dd MMMM yyyy',
             },
             categories: ["2018-08-19", "2018-08-20", "2018-08-21", "2018-08-22", "2018-08-23", "2018-08-24", "2018-08-25"]
         }
@@ -80,6 +81,30 @@
             xaxis: xAxis.value,
             tooltip: tooltip.value,
             colors: colors.value,
+            yaxis: {
+                labels: {
+                    formatter: function(val, index) {
+                        return val.toFixed(0);
+                    }
+                }
+            },
+            annotations: {
+                xaxis: [
+                    {
+                    // x: new Date('26 Nov 2017').getTime(), make it like that but today in 00:00:00
+                        x: new Date(moment().format('YYYY-MM-DD').toString()).getTime(),
+                        borderColor: '#775DD0',
+                        label: {
+                            borderColor: "#775DD0",
+                            style: {
+                                color: "#fff",
+                                background: "#775DD0"
+                            },
+                            text: "Today"
+                        }
+                    }
+                ]
+            }
         }
     });
 
