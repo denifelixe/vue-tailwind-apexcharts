@@ -3,12 +3,16 @@
     import { computed } from 'vue';
 
     const props = defineProps([
+        // Class
+        'class',
+
         // Chart Options
         'xAxis',
         'tooltip',
+        'colors',
 
         // Data Series
-        'series'
+        'series',
     ]);
 
 
@@ -39,32 +43,48 @@
             },
         }
     });
-    const chartOptions = {
-        chart: {
-            height: 350,
-            type: 'area',
-            toolbar: {
-                //zoom out false when chart loads
-                tools: {
-                    zoomout: false,
-                    //reset icon
-                    reset: '<img src="/images/icon/custom-icons/arrows-rotate-solid.svg" />',
+    const colors = computed(() => {
+        if (props.colors) {
+            return props.colors;
+        }
+
+        //Example
+        return ['#1BC5BD', '#F64E60'];
+    })
+    const chartOptions = computed(() => {
+        return {
+            chart: {
+                height: 500,
+                type: 'area',
+                toolbar: {
+                    //zoom out false when chart loads
+                    tools: {
+                        zoomout: false,
+                        //reset icon
+                        reset: '<img src="/images/icon/custom-icons/arrows-rotate-solid.svg" />',
+                    }
+                    
                 }
-                
-            }
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            curve: 'smooth'
-        },
-        xaxis: xAxis.value,
-        tooltip: tooltip.value,
-    };
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'smooth'
+            },
+            legend: {
+                itemMargin: {
+                    vertical: 50
+                }
+            },
+            xaxis: xAxis.value,
+            tooltip: tooltip.value,
+            colors: colors.value,
+        }
+    });
 
     // Data Series
-    const seriesData = computed(() => {
+    const series = computed(() => {
         if (props.series) {
             return props.series;
         }
@@ -81,9 +101,10 @@
             }
         ];
     });
-    const series = seriesData.value;
 </script>
 
 <template>
-    <ApexCharts type="area" height="350" :options="chartOptions" :series="series"></ApexCharts>
+    <div :class="class">
+        <ApexCharts type="area" height="500" :options="chartOptions" :series="series"></ApexCharts>
+    </div>
 </template>
