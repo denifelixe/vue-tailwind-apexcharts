@@ -117,11 +117,11 @@
         //Example
         return [
             {
-                name: 'Audiences Registered',
+                name: 'Registered Audiences',
                 data: [31, 40, 28, 51, 42, 109, 100]
             }, 
             {
-                name: 'Audiences Unregistered',
+                name: 'Unregistered Audiences',
                 data: [11, 32, 45, 32, 34, 52, 41]
             }
         ];
