@@ -65,6 +65,16 @@
     </div>
 
     <button @click="setSomethingChart">Set Something Chart</button>
-
-    
 </template>
+
+<style>
+    .v-enter-active,
+    .v-leave-active {
+        transition: opacity 3s ease;
+    }
+    
+    .v-enter-from,
+    .v-leave-to {
+        opacity: 0;
+    }
+</style>
