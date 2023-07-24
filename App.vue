@@ -1,4 +1,7 @@
 <script setup>
+    import { onMounted, ref } from 'vue';
+    import moment from 'moment';
+
     import ApexChartSplineArea from './ApexChartSplineArea.vue';
 
     // Audience Chart
@@ -53,6 +56,10 @@
                 chartIsLoaded.value = true;
             })
         }
+
+        onMounted(() => {
+            setSomethingChart();
+        });
     //
 </script>
 
